@@ -21,10 +21,15 @@ jobs:
         path: 'esp32-s2-hmi-devkit-1/examples/smart-panel'
     - name: Archive binaries
       run: |
-        cd 'esp32-s2-hmi-devkit-1/examples/smart-panel'
-        zip --junk-paths ../../../binaries.zip build/*.bin build/bootloader/*.bin build/partition_table/*.bin
+        mkdir -p build/bootloader
+        mkdir -p build/partition_table
+        cp 'esp32-s2-hmi-devkit-1/examples/smart-panel/build/*.bin' binaries
+        cp 'esp32-s2-hmi-devkit-1/examples/smart-panel/build/bootloader/*.bin' binaries/bootloader
+        cp 'esp32-s2-hmi-devkit-1/examples/smart-panel/build/partition_table/*.bin' binaries/partition_table
+        echo 'esptool.py -p COM15 -b 460800 --before default_reset --after hard_reset --chip esp32s2  write_flash --flash_mode dio --flash_size detect --flash_freq 80m 0x1000 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 smart-panel.bin' >build/Flash-Image.ps1
+      #zip --junk-paths ../../../binaries.zip build/*.bin build/bootloader/*.bin build/partition_table/*.bin
     - name: Archive artifact
       uses: actions/upload-artifact@v2
       with:
-        name: binaries.zip
-        path: binaries.zip
+        name: build
+        path: build.zip
