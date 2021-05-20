@@ -13,5 +13,17 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
     - name: esp-idf build
-      uses: sebastianPsm/esp-idf-ci-action@1
+      uses: georgik/esp-idf-ci-action
+      with:
+        path: 'esp32-s2-hmi-devkit-1/examples/smart-panel'
+    - name: Archive binaries
+      run: |
+        zip --junk-paths binaries build/*.bin build/bootloader/*.bin build/partition_table/*.bin
+    - name: Archive artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: binaries.zip
+        path: binaries.zip
