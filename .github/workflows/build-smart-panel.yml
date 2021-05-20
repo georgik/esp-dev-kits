@@ -16,7 +16,7 @@ jobs:
       with:
         submodules: 'recursive'
     - name: esp-idf build
-      uses: georgik/esp-idf-ci-action
+      uses: georgik/esp-idf-ci-action@heads/main
       with:
         path: 'esp32-s2-hmi-devkit-1/examples/smart-panel'
     - name: Archive binaries
