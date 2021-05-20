@@ -21,7 +21,8 @@ jobs:
         path: 'esp32-s2-hmi-devkit-1/examples/smart-panel'
     - name: Archive binaries
       run: |
-        zip --junk-paths binaries build/*.bin build/bootloader/*.bin build/partition_table/*.bin
+        cd 'esp32-s2-hmi-devkit-1/examples/smart-panel'
+        zip --junk-paths ../../../binaries.zip build/*.bin build/bootloader/*.bin build/partition_table/*.bin
     - name: Archive artifact
       uses: actions/upload-artifact@v2
       with:
