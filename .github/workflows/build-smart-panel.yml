@@ -19,6 +19,7 @@ jobs:
       uses: georgik/esp-idf-ci-action@heads/master
       with:
         path: 'esp32-s2-hmi-devkit-1/examples/smart-panel'
+        idfVersion: 'latest'
     - name: Archive binaries
       run: |
         mkdir -p build/bootloader
