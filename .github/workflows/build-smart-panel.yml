@@ -31,5 +31,5 @@ jobs:
     - name: Archive artifact
       uses: actions/upload-artifact@v2
       with:
-        name: build
-        path: build.zip
+        name: build.zip
+        path: build
